@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>☕ Simulasi Prediksi Coffee Shop Menggunakan Metode Monte Carlo</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+
+    <!-- CSS kustom -->
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<main class="py-4">
+    <div class="container d-flex justify-content-center">
+        <div class="page-wrapper w-100">
+
+            <!-- JUDUL BUTTON -->
+            <div class="text-center mb-4">
+                <button class="btn-title-neon title-button">
+                    ☕ SIMULASI PREDIKSI JUMLAH PELANGGAN COFFEE SHOP MENGGUNAKAN METODE MONTE CARLO ☕
+                </button>
+            </div>
+
+            <!-- Card Input -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-12">
+                    <div class="card shadow-lg border-0 card-glass">
+                        <div class="card-header bg-primary text-white d-flex align-items-center">
+                            <i class="bi bi-gear-fill me-2"></i>
+                            <h5 class="mb-0">Pengaturan Simulasi</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="days" class="form-label fw-semibold">
+                                    Jumlah Bilangan Acak / Hari Prediksi
+                                </label>
+                                <input
+                                    id="days"
+                                    type="number"
+                                    min="1"
+                                    value="10"
+                                    class="form-control"
+                                />
+                                <div class="form-text">
+                                    Misalkan 10 artinya akan menghasilkan 10 bilangan acak
+                                    untuk memprediksi 10 hari ke depan.
+                                </div>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="btn btn-primary px-4 btn-run"
+                                onclick="runSimulation()"
+                            >
+                                <i class="bi bi-play-circle me-1"></i>
+                                Jalankan Prediksi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hasil Simulasi (disembunyikan dulu) -->
+            <div id="resultSection" style="display:none;">
+
+                <!-- Hitung Interval -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-lg border-0 card-glass">
+                            <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-table"></i>
+                                    <h5 class="mb-0">Hitung Interval</h5>
+                                </div>
+                                <span class="badge bg-light text-dark">
+                                    Distribusi Pelanggan per Hari
+                                </span>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table
+                                        id="intervalTable"
+                                        class="table table-striped table-bordered mb-0 align-middle text-center table-sm"
+                                    >
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Interval Pelanggan / Hari</th>
+                                                <th>Frekuensi</th>
+                                                <th>Probabilitas</th>
+                                                <th>Kumulatif</th>
+                                                <th>Interval (0 - 999)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Bilangan Acak -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-lg border-0 card-glass">
+                            <div class="card-header bg-secondary text-white d-flex align-items-center gap-2">
+                                <i class="bi bi-shuffle"></i>
+                                <h5 class="mb-0">Generate Bilangan Acak (LCG)</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table
+                                        id="randomTable"
+                                        class="table table-striped table-bordered mb-0 align-middle text-center table-sm"
+                                    >
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Zi ke-</th>
+                                                <th>(a·Zi) + C</th>
+                                                <th>((a·Zi)+C) mod m</th>
+                                                <th>Angka tiga digit</th>
+                                                <th>Prediksi Jumlah Pelanggan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-light">
+                                <p id="summary" class="mb-0 fw-semibold text-end text-primary"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- /resultSection -->
+
+            <!-- FOOTER -->
+            <footer class="text-center mt-3 text-muted small">
+                © 2025 | Purnama Sari Siregar — Simulasi Prediksi Jumlah Pelanggan Coffee Shop Menggunakan Metode Monte Carlo
+            </footer>
+
+        </div>
+    </div>
+</main>
+
+<!-- Bootstrap JS -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+<!-- Script simulasi -->
+<script src="/static/script.js"></script>
+</body>
+</html>
