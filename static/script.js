@@ -65,16 +65,15 @@ function fillRandomTable(rows) {
 }
 
 function updateSummary(data) {
-    const rows = data.random_rows;
+    // rata-rata jumlah pelanggan per hari dari simulasi (float)
+    const avgPred = data.avg_pred;
 
-    // rata-rata prediksi
-    const avgPred = Math.round(data.avg_pred);
+    // prediksi jumlah pelanggan dalam 1 tahun (365 hari)
+    const yearlyPred = Math.round(avgPred * 365);
 
-    // prediksi hari terakhir (Zi ke-n)
-    const last = rows[rows.length - 1];
-    const lastPred = last.prediksi;
+    // format angka pakai format Indonesia (82.125, 120.000, dst.)
+    const formattedYearly = yearlyPred.toLocaleString('id-ID');
 
     document.getElementById("summary").innerHTML =
-        `Perkiraan rata-rata jumlah pelanggan per hari: <b>${avgPred}</b> pelanggan<br>` +
-        `Prediksi jumlah pelanggan di hari ke-${rows.length}: <b>${lastPred}</b> pelanggan`;
+        `Prediksi rata-rata jumlah pelanggan dalam 1 tahun: <b>${formattedYearly}</b> pelanggan`;
 }
