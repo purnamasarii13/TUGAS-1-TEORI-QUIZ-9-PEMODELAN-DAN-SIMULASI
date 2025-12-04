@@ -59,8 +59,17 @@ sim_result = simulate_customers(n_days=30, random_seed=42)
 print("\nHasil Simulasi 30 Hari:")
 print(sim_result)
 
-avg_sim = sim_result["Jumlah_Pelanggan_Simulasi"].mean()
-avg_hist = data.mean()
+# 5. Hitung rata-rata simulasi & prediksi 1 tahun
+avg_sim = sim_result["Jumlah_Pelanggan_Simulasi"].mean()  # rata-rata per hari
+yearly_pred = avg_sim * 365  # prediksi 1 tahun (365 hari)
 
-print("\nRata-rata pelanggan hasil simulasi:", round(avg_sim))
-print("Rata-rata historis:", round(avg_hist))
+# Fungsi bantu untuk format angka gaya Indonesia: 78.840,000
+def format_id(x):
+    s = f"{x:,.3f}"        # contoh: 78840 -> '78,840.000'
+    s = s.replace(',', 'X').replace('.', ',').replace('X', '.')
+    return s
+
+print("\nPerkiraan rata-rata jumlah pelanggan per hari:",
+      format_id(avg_sim), "pelanggan")
+print("Prediksi rata-rata jumlah pelanggan dalam 1 tahun adalah",
+      format_id(yearly_pred), "pelanggan")
